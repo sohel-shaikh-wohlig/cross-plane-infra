@@ -9,6 +9,10 @@ Crossplane Infra, home to Crossplane XRD, XR, Claims
 - Claim : Custom API within a namespace
 - Kind : Cluster Level
 
+## Open Application Model (OAM)
+
+- Kubevela
+
 # Source:
 
 https://gist.github.com/6fb3e7da327df9203d9d4c184fcb5831
