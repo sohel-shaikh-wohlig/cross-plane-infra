@@ -22,7 +22,7 @@ spec:
       spec:
         forProvider:
           region: us-east-1
-          version: "1.25"
+          version: "1.26"
           roleArnSelector:
             matchControllerRef: true
             matchLabels:
@@ -433,4 +433,22 @@ spec:
             fmt: "%s-ekscluster"
     readinessChecks:
       - type: None
-  
+  - name: kubevela
+    base:
+      apiVersion: helm.crossplane.io/v1beta1
+      kind: Release
+      spec:
+        rollbackLimit: 3
+        forProvider:
+          namespace: vela-system
+          chart:
+            name: vela-core
+            repository: https://charts.kubevela.net/core
+            version: "1.0.7"
+    patches:
+    - fromFieldPath: spec.id
+      toFieldPath: metadata.name
+    - fromFieldPath: spec.id
+      toFieldPath: spec.providerConfigRef.name
+
+
