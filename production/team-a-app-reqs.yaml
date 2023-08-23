@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-a-apps-reqs
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: production
+  source:
+    path: team-app-reqs
+    repoURL: https://github.com/sohel-shaikh-wohlig/cross-plane-infra
+    targetRevision: HEAD
+  destination:
+    server: https://8C16949A944B69F113EB236DD8996AD9.gr7.us-east-1.eks.amazonaws.com
+    namespace: production
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
