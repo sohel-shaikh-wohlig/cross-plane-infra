@@ -131,3 +131,6 @@ dist
 
 # AWS Configuration files
 /aws-creds.conf
+
+/*creds*
+kubeconfig.yaml
