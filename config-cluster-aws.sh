@@ -19,6 +19,8 @@ aws eks --region us-east-1 \
 
 kubectl create namespace production
 
+kubectl config set-context --current --namespace=argocd
+
 argocd cluster add \
     $(kubectl config current-context) \
     --name $TEAM_NAME
