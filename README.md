@@ -18,3 +18,5 @@ Crossplane Infra, home to Crossplane XRD, XR, Claims
 https://gist.github.com/6fb3e7da327df9203d9d4c184fcb5831
 
 ![Alt text](/crossplane.webp "Corssplane Diagram")
+
+### Refere _how-to.sh_ for setup
