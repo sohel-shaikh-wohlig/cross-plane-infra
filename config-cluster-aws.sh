@@ -19,7 +19,9 @@ aws eks --region us-east-1 \
 
 kubectl create namespace production
 
-kubectl config set-context --current --namespace=argocd
+#Install Argo CD on newly created Cluster
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 
 argocd cluster add \
     $(kubectl config current-context) \
