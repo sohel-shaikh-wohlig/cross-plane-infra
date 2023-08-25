@@ -12,4 +12,3 @@ spec:
       creationTimestamp: null
       name: aws-creds
       namespace: crossplane-system
-
