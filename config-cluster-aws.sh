@@ -23,6 +23,9 @@ kubectl create namespace production
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 
+#Set current context namespace to argocd
+kubectl config set-context --current --namespace=argocd
+
 argocd cluster add \
     $(kubectl config current-context) \
     --name $TEAM_NAME
