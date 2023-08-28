@@ -6,10 +6,10 @@
 
 cat orig/cluster.yaml
 
-cp orig/cluster.yaml team-a-infra/.
+cp orig/cluster.yaml team-alfa-infra/.
 
 git add .
 
-git commit -m "Team A infra"
+git commit -m "Team Alfa infra"
 
 git push

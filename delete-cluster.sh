@@ -4,10 +4,10 @@
 # Deleting infrastructure #
 ###########################
 
-rm team-a-infra/cluster.yaml
+rm team-alfa-infra/cluster.yaml
 
 git add .
 
-git commit -m "Remove the cluster"
+git commit -m "Remove infra cluster"
 
 git push
