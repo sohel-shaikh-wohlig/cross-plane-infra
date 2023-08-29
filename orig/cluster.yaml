@@ -1,6 +1,6 @@
 ---
-apiVersion: wohlig/v1beta1
-kind: EKSCluster
+apiVersion: wohlig.com/v1beta1
+kind: CompositeCluster
 metadata:
   name: crossplane-cluster
 spec:

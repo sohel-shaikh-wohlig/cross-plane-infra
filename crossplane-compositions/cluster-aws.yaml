@@ -10,8 +10,8 @@ metadata:
 spec:
   writeConnectionSecretsToNamespace: crossplane-system
   compositeTypeRef:
-    apiVersion: wohlig/v1beta1
-    kind: EKSCluster
+    apiVersion: wohlig.com/v1beta1
+    kind: CompositeCluster
 
   patchSets:
     - name: common-parameters

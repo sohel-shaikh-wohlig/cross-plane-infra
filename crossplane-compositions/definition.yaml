@@ -2,16 +2,17 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: eksclusters.wohlig
+  name: eksclusters.wohlig.com
 spec:
-  group: wohlig
-  names:
-    kind: EKSCluster
-    plural: eksclusters
   connectionSecretKeys:
-    - cluster-ca
-    - apiserver-endpoint
-    - value
+  - kubeconfig
+  group: wohlig.com
+  names:
+    kind: CompositeCluster
+    plural: compositeclusters
+  claimNames:
+    kind: ClusterClaim
+    plural: clusterclaims
   versions:
   - name: v1beta1
     served: true
