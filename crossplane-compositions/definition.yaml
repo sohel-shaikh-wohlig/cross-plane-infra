@@ -2,7 +2,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: eksclusters.wohlig.com
+  name: compositeclusters.wohlig.com
 spec:
   connectionSecretKeys:
   - kubeconfig
