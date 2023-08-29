@@ -35,6 +35,6 @@ spec:
   compositionRef:
     name: amazon-eks-cluster
 
-  writeConnectionSecretToRef:
-    namespace: eks
-    name: crossplane-cluster-connection
+  #writeConnectionSecretToRef:
+    #namespace: eks
+    #name: crossplane-cluster-connection
