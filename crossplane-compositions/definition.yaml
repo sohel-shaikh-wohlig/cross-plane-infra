@@ -1,4 +1,3 @@
----
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
@@ -6,6 +5,8 @@ metadata:
 spec:
   connectionSecretKeys:
   - kubeconfig
+  defaultCompositionRef:
+    name: cluster-google
   group: wohlig.com
   names:
     kind: CompositeCluster
@@ -14,7 +15,7 @@ spec:
     kind: ClusterClaim
     plural: clusterclaims
   versions:
-  - name: v1beta1
+  - name: v1alpha1
     served: true
     referenceable: true
     schema:
@@ -24,100 +25,46 @@ spec:
           spec:
             type: object
             properties:
+              id:
+                type: string
+                description: ID of this Cluster that other objects will use to refer to it.
               parameters:
                 type: object
                 properties:
-                  region:
-                    description: Geographic location of this VPC
-                    type: string       
-                    enum: ["us-east-1", "us-west-2"]   
-                    
-                  vpc-cidrBlock:
-                    description: CIDR block for VPC
-                    type: string   
-                  vpc-name:
-                    description: Name for VPC
-                    type: string       
-
-                  subnet1-public-name:
-                    description: Name for public subnet 1
-                    type: string  
-                  subnet1-public-cidrBlock:
-                    description: CIDR block for public subnet 1
+                  version:
+                    description: The Kubernetes version for the cluster.
                     type: string
-                  subnet1-public-availabilityZone:
-                    description: AZ for public subnet 1
-                    type: string                      
-
-                  subnet2-public-name:
-                    description: Name for public subnet 2
-                    type: string  
-                  subnet2-public-cidrBlock:
-                    description: CIDR block for public subnet 2
-                    type: string  
-                  subnet2-public-availabilityZone:
-                    description: AZ for public subnet 2
-                    type: string   
-
-                  subnet1-private-name:
-                    description: Name for private subnet 1
-                    type: string  
-                  subnet1-private-cidrBlock:
-                    description: CIDR block for private subnet 1
+                  nodeSize:
+                    description: The size of the nodes; small, medium, large
                     type: string
-                  subnet1-private-availabilityZone:
-                    description: AZ for private subnet 1
-                    type: string                      
-
-                  subnet2-private-name:
-                    description: Name for private subnet 2
-                    type: string  
-                  subnet2-private-cidrBlock:
-                    description: CIDR block for private subnet 2
-                    type: string  
-                  subnet2-private-availabilityZone:
-                    description: AZ for private subnet 2
-                    type: string  
-
-                  cluster-role:
-                    description: EKS cluster role
-                    type: string     
-                  workernode-role:
-                    description: EKS worker node role
-                    type: string                                       
-
-                  k8s-version:
-                    description: Kubernetes version
-                    type: string
-                    enum: ["1.20", "1.21", "1.22"]    
-                  workers-size:
-                    description: Desired number of worker nodes in the cluster
+                  minNodeCount:
+                    description: The minimum number of nodes
                     type: integer
-                  workload-type:
-                    description: Type of workloads to be run on this cluster (GPU or non-GPU)"
-                    type: string       
-                    enum: ["gpu", "non-gpu"]                       
-                    
+                    default: 1
                 required:
-                  - region
-                  - vpc-name
-                  - vpc-cidrBlock
-                  - subnet1-public-name
-                  - subnet1-public-cidrBlock
-                  - subnet1-public-availabilityZone
-                  - subnet2-public-name
-                  - subnet2-public-cidrBlock
-                  - subnet2-public-availabilityZone
-                  - subnet1-private-name
-                  - subnet1-private-cidrBlock
-                  - subnet1-private-availabilityZone
-                  - subnet2-private-name
-                  - subnet2-private-cidrBlock
-                  - subnet2-private-availabilityZone    
-                  - k8s-version
-                  - workers-size
-                  - workload-type   
-                  - cluster-role     
-                  - workernode-role      
+                - nodeSize
             required:
-              - parameters
+            - id
+            - parameters
+          status:
+            type: object
+            properties:
+              clusterName:
+                description: The name of the cluster
+                type: string
+              controlPlaneStatus:
+                description: The status of the control plane
+                type: string
+              nodePoolStatus:
+                description: The status of the node pool
+                type: string
+    additionalPrinterColumns:
+    - name: clusterName
+      type: string
+      jsonPath: ".status.clusterName"
+    - name: controlPlane
+      type: string
+      jsonPath: ".status.controlPlaneStatus"
+    - name: nodePool
+      type: string
+      jsonPath: ".status.nodePoolStatus"
