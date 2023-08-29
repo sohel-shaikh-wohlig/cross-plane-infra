@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: team-alfa-apps-reqs
+  name: team-a-apps-reqs
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,7 +12,7 @@ spec:
     repoURL: https://github.com/sohel-shaikh-wohlig/cross-plane-infra
     targetRevision: HEAD
   destination:
-    server: team-alfa
+    server: team-a
     namespace: production
   syncPolicy:
     automated:

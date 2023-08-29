@@ -22,7 +22,7 @@ spec:
       spec:
         forProvider:
           region: us-east-1
-          version: "1.26"
+          version: "1.27"
           roleArnSelector:
             matchControllerRef: true
             matchLabels:
@@ -267,7 +267,6 @@ spec:
           cidrBlock: 10.0.0.0/16
           enableDnsSupport: true
           enableDnsHostnames: true
-          instanceTenancy: default
     patches:
     - fromFieldPath: spec.id
       toFieldPath: metadata.name

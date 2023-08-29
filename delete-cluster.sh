@@ -4,7 +4,7 @@
 # Deleting infrastructure #
 ###########################
 
-rm team-alfa-infra/cluster.yaml
+rm team-a-infra/cluster.yaml
 
 git add .
 

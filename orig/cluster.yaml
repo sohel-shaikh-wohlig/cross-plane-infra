@@ -1,11 +1,11 @@
 apiVersion: wohlig.com/v1alpha1
 kind: CompositeCluster
 metadata:
-  name: team-alfa
+  name: team-a
   labels:
     cluster-owner: sohel
 spec:
-  id: team-alfa
+  id: team-a
   compositionRef:
     name: cluster-aws
   parameters:
