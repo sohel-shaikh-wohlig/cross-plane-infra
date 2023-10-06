@@ -59,6 +59,9 @@ jobs:
         with:
           script: |
             import os
+
+            files = ${{ steps.added-files-in-proxy.outputs.all_changed_files}}.split(",")
+            print(files)
             print("Directory Contensts: ")
             for f in os.listdir():
               print(f)
