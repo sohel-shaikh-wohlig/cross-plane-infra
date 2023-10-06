@@ -62,3 +62,8 @@ jobs:
 
             files = str('${{ steps.added-files-in-proxy.outputs.all_changed_files}}').split(",")
             print(files)
+
+            for f in files:
+              file = open(f,'r')
+              print(file.read())
+              file.close()
