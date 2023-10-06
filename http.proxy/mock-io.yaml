@@ -1,0 +1,32 @@
+kind: HTTPProxy
+apiVersion: projectcontour.io/v1
+metadata:
+  name: mock-io
+spec:
+  routes:
+    - conditions:
+        - prefix: /
+      rateLimitPolicy:
+        global:
+          descriptors:
+            - entries:
+                - remoteAddress: {}
+      services:
+        - name: mock
+          port: 80
+  virtualhost:
+    fqdn: mock.wohlig.com
+    corsPolicy:
+      allowCredentials: true
+      allowOrigin:
+        - "*" # allows any origin
+      allowMethods:
+        - GET
+        - POST
+        - OPTIONS
+      allowHeaders:
+        - "*" # allows any origin
+      exposeHeaders:
+        - Content-Length
+        - Content-Range
+      maxAge: "10m" # preflight requests can be cached for 10 minutes.
