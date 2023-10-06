@@ -29,6 +29,7 @@ jobs:
         uses: tj-actions/changed-files@v39
         with:
           since_last_remote_commit: true #To compare changes between the current commit and the last pushed remote commit
+          seperator: ", "
 
       - name: List all Added or Changed files
         run: |
