@@ -41,7 +41,7 @@ jobs:
         id: added-files-in-proxy
         uses: tj-actions/changed-files@v39
         with:
-          files: http.proxy/*.{yaml}
+          files: /http.proxy/*.{yaml}
 
       - name: Run step if any file(s) added in http.proxy folder
         if: steps.added-files-in-proxy.outputs.any_changed == 'true'
