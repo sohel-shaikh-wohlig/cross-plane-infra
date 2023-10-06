@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,6 +32,6 @@ jobs:
 
       - name: List all Added or Changed files
         run: |
-          for file in ${{ steps.added-changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
+          for file in ${{ steps.added-changed-files.outputs.added_files }}; do
+            echo "$file was added"
           done
