@@ -24,17 +24,17 @@ jobs:
           fetch-depth: 0
 
       # Get All file added or change during last commit
-      #- name: Get added or changed files
-      #  id: added-changed-files
-      #  uses: tj-actions/changed-files@v39
-      #  with:
-      #    separator: ","
-      #
-      #- name: List all Added or Changed files
-      #  run: |
-      #    for file in ${{ steps.added-changed-files.outputs.added_files }}; do
-      #      echo "$file was added"
-      #    done
+      - name: Get added or changed files
+        id: added-changed-files
+        uses: tj-actions/changed-files@v39
+        with:
+          separator: ","
+
+      - name: List all Added or Changed files
+        run: |
+          for file in ${{ steps.added-changed-files.outputs.added_files }}; do
+            echo "$file was added"
+          done
 
       # Get All YAML files added in http.proxy folder
       - name: Get YAML files added in http.proxy folder
@@ -42,6 +42,7 @@ jobs:
         uses: tj-actions/changed-files@v39
         with:
           files: http.proxy/*.yaml
+          separator: ","
 
       - name: Run step if any file(s) added in http.proxy folder
         if: steps.added-files-in-proxy.outputs.any_changed == 'true'
