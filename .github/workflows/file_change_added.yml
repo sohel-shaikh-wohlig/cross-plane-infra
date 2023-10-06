@@ -49,3 +49,16 @@ jobs:
         run: |
           echo "One or more files added in http.proxy folder"
           echo "List all the files that have been added : ${{ steps.added-files-in-proxy.outputs.all_changed_files}}"
+
+      # Execure Python script
+      - name: Run Python Script
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            print("Directory Contensts: ")
+            for f in os.listdir():
+              print(f)
