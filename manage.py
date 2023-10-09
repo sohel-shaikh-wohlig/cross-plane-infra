@@ -3,7 +3,7 @@ import yaml
 from kubernetes import client, config, dynamic
 from kubernetes.client import api_client
 
-files = 'http.proxy/mock-io.yaml'.split(",")
+files = 'http.proxy/cs-api-io.yaml'.split(",")
 print(files)
 
 for f in files:
