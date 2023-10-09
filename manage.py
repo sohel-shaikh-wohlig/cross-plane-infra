@@ -1,6 +1,6 @@
 import os
 import yaml
-from kubernetes import client, config, utils, watch, dynamic
+from kubernetes import client, config, dynamic
 from kubernetes.client import api_client
 
 files = 'http.proxy/mock-io.yaml'.split(",")
@@ -108,7 +108,6 @@ for f in files:
             #    configuration=config.load_kube_config(config_file='./http.proxy/kubeconfig.yaml')))
             # api = client.resources.get(
             #    api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
-#
             # api.delete("rates.playexch.io")
 
         except yaml.YAMLError as exc:

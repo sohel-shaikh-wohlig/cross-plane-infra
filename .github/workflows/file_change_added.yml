@@ -54,16 +54,61 @@ jobs:
       - name: Run Python Script
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-      - uses: jannekem/run-python-script-action@v1
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install yaml
+          pip install kubernetes
+
+      - name: Create record on Cloudflare
+        uses: jannekem/run-python-script-action@v1
         with:
           script: |
             import os
+            import yaml
+            from kubernetes import client, config, dynamic
+            from kubernetes.client import api_client
 
             files = str('${{ steps.added-files-in-proxy.outputs.all_changed_files}}').split(",")
             print(files)
 
             for f in files:
-              file = open(f,'r')
-              print(file.read())
-              file.close()
+              with open(f, 'r') as stream:
+                try:
+                  content = yaml.safe_load(stream)
+                  fqdn = content["spec"]["virtualhost"]["fqdn"]
+                  proxied = True
+
+                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/kubeconfig.yaml')))
+                  api = client.resources.get(api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
+                  name = fqdn
+                  record_manifest = {
+                      "apiVersion": "dns.cloudflare.crossplane.io/v1alpha1",
+                      "kind": "Record",
+                      "metadata": {
+                          "name": fqdn
+                      },
+                      "spec": {
+                          "forProvider": {
+                              "content": "nlb.zodexchange.co.",
+                              "name": fqdn,
+                              "proxied": proxied,
+                              "type": "CNAME",
+                              "zone": "7ea9fe1045447b31a338fbae6a1cfce9",
+                              "zoneSelector": {
+                                  "matchLabels": {
+                                      "identifier": "dns-record"
+                                  }
+                              }
+                          },
+                          "providerConfigRef": {
+                              "name": "zodexchange.co"
+                          }
+                      }
+                  }
+                  record = api.create(body=record_manifest, namespace='default')
+                  
+                except yaml.YAMLError as exc:
+                  print(exc)
