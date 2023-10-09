@@ -75,17 +75,17 @@ for f in files:
                 configuration=config.load_kube_config(config_file='./http.proxy/kubeconfig.yaml')))
             api = client.resources.get(
                 api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
-            name = "rates.playexch.io"
+            name = fqdn
             record_manifest = {
                 "apiVersion": "dns.cloudflare.crossplane.io/v1alpha1",
                 "kind": "Record",
                 "metadata": {
-                    "name": "rates.playexch.io"
+                    "name": fqdn
                 },
                 "spec": {
                     "forProvider": {
                         "content": "nlb.zodexchange.co.",
-                        "name": "rates.playexch.io",
+                        "name": fqdn,
                         "proxied": proxied,
                         "type": "CNAME",
                         "zone": "7ea9fe1045447b31a338fbae6a1cfce9",
