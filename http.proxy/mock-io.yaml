@@ -1,7 +1,7 @@
 kind: HTTPProxy
 apiVersion: projectcontour.io/v1
 metadata:
-  name: mock-io
+  name: rates-io
 spec:
   routes:
     - conditions:
@@ -12,10 +12,12 @@ spec:
             - entries:
                 - remoteAddress: {}
       services:
-        - name: mock
+        - name: kings-redis
           port: 80
+      loadBalancerPolicy:
+        strategy: WeightedLeastRequest
   virtualhost:
-    fqdn: mock.wohlig.com
+    fqdn: rates.playexch.io
     corsPolicy:
       allowCredentials: true
       allowOrigin:
