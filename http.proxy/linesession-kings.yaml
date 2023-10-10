@@ -1,0 +1,41 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: linesession-kings
+spec:
+  routes:
+    - conditions:
+        - prefix: /
+        - header:
+            name: x-key-id
+      rateLimitPolicy:
+        global:
+          descriptors:
+            - entries:
+                - remoteAddress: {}
+      loadBalancerPolicy:
+        strategy: WeightedLeastRequest
+      services:
+        - name: linesession
+          port: 80
+      timeoutPolicy:
+        idle: infinity
+        response: infinity
+  virtualhost:
+    corsPolicy:
+      allowCredentials: true
+      allowHeaders:
+        - '*'
+      allowMethods:
+        - GET
+        - POST
+        - OPTIONS
+      allowOrigin:
+        - '*'
+      exposeHeaders:
+        - Content-Length
+        - Content-Range
+      maxAge: 10m
+    fqdn: linesession.kingsplay.co
+    tls:
+      secretName: linesession-kings
