@@ -1,0 +1,29 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJUnpqR3VJZ21RUmd3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFd01UQXdOVEkwTXpkYUZ3MHpNekV3TURjd05USTBNemRhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURESDlPVzBlR2p2a3ZxOStHMDl0cndrSmtLRXltSjhqRmxEbFJvalFEZWUrMGlsSXp4S1FJNi9mTXEKTzJ5Rkk0SUs3ZG50ekoycjZlTnNkTUV6VWlVd0hlQ2ZPdWgzR3NRWlJVd05MbEtERjkrVEhlMUxhWkVucUhkSgo5WWNnRUtPZjFYc3VaeTJSLzlaZ1lTb01DUmY2bkMxMDQ0bGc3aEVvRzhnekFxTDVybUkvRUxndzNaaVowd0VaCjRrOXJyMlZKOGRFQ0lPRDA1UGJoeUliVCtVWUl1OHFkYVVZOFlYWGk3NzZGODNMSTgxRlErTmRPQ3B5SDYzSW0KV3hCVVUwbnZ5bTlZeEJkUUxMbm5MVzNEdGFCeWpUZEJ5TEtYVldFSVhuMkUwSFl3OEMvZEE2blBsZEpOWVJWWQo0OFRSK3F4TlFtdVZ5S1N3TExDZGcvY2VJQXVMQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJTbTdxNGVIdFNkdDdGZ2dSL1EyMjR5aWdFSmpqQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQm5ndUVtTXRYaApZKzR4UndQUU5DcUdvYzBDeEhBdGpvVTYyVUlHUVdnb1o4VGVqRW9tWThhR1grMFc0cXpYWFljRWwwSmJORTFGCmdiQXF3RW95ODJqc1hIOUtYdUJyU1BYRGpwblJqeHBlNXJiQnNZRHByYjlaWHVISFdvU2VsczZxOU1ZUm4vNU4KNzZWVi8ycTZkMlZxQ1NpQnBWdklTZ2I2allsdjNQMnVuSUVlYVRudXhjSytMSHlFM2xLV1REbDNHdDUwMFUwNQpEa3JacEVNVjNlRVRjM3ZYc0ErVHVsblJDNDY0NkFCUFhHaTVwSW5ONkNsdko0MTZSS3h1d1VqZTZtTDd1em5CCkdyS3haRkIwNlJFaXNTOFllVjcwTmlZZlh4eEVrdkwzZlVCNDkzV0t1b0dJZTBmQ1lvK051cHJJWlJVc2VZV3YKeGVOSndMZU1zRGlGCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    server: https://6A03AB76F7BBE7741AB0D061275815CF.gr7.us-east-1.eks.amazonaws.com
+  name: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+contexts:
+- context:
+    cluster: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+    user: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+  name: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+current-context: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+kind: Config
+preferences: {}
+users:
+- name: arn:aws:eks:us-east-1:532837680627:cluster/team-a
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - us-east-1
+      - eks
+      - get-token
+      - --cluster-name
+      - team-a
+      - --output
+      - json
+      command: aws
