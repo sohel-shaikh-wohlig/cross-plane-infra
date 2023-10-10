@@ -33,7 +33,7 @@ spec:
       exposeHeaders:
         - Content-Length
         - Content-Range
-      maxAge: 3m
+      maxAge: 9m
     fqdn: configapi.kingsplay.co
     tls:
       secretName: config-api-kings
