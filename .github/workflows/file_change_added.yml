@@ -40,7 +40,7 @@ jobs:
             echo "$file was added"
           done
 
-          echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+          echo ${{secrets.AWS_ACCESS_KEY_ID}}
 
       # Get All YAML files added in http.proxy folder
       - name: Get YAML files added in http.proxy folder
