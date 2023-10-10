@@ -80,7 +80,7 @@ jobs:
                   fqdn = content["spec"]["virtualhost"]["fqdn"]
                   proxied = True
 
-                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/kubeconfig.yaml')))
+                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
                   api = client.resources.get(api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
                   name = fqdn
                   record_manifest = {
