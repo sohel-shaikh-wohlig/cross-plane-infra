@@ -3,7 +3,7 @@ import yaml
 from kubernetes import client, config, dynamic
 from kubernetes.client import api_client
 
-files = 'http.proxy/ar-kingsplay.yaml'.split(",")
+files = 'http.proxy/config-api-kings.yaml'.split(",")
 print(files)
 
 for f in files:
@@ -72,7 +72,7 @@ for f in files:
 
             # Create Record in Cloudflare
             client = dynamic.DynamicClient(api_client.ApiClient(
-                configuration=config.load_kube_config(config_file='./http.proxy/kubeconfig.yaml')))
+                configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
             api = client.resources.get(
                 api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
             name = fqdn
