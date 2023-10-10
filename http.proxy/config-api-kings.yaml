@@ -1,0 +1,39 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: config-api-kings
+spec:
+  routes:
+    - conditions:
+        - prefix: /
+      rateLimitPolicy:
+        global:
+          descriptors:
+            - entries:
+                - remoteAddress: {}
+      loadBalancerPolicy:
+        strategy: WeightedLeastRequest
+      services:
+        - name: config-api
+          port: 80
+      timeoutPolicy:
+        idle: infinity
+        response: infinity
+  virtualhost:
+    corsPolicy:
+      allowCredentials: true
+      allowHeaders:
+        - '*'
+      allowMethods:
+        - GET
+        - POST
+        - OPTIONS
+      allowOrigin:
+        - '*'
+      exposeHeaders:
+        - Content-Length
+        - Content-Range
+      maxAge: 10m
+    fqdn: configapi.kingsplay.co
+    tls:
+      secretName: config-api-kings
