@@ -18,6 +18,10 @@ jobs:
   changed_files:
     runs-on: ubuntu-latest
     name: Check Added Changed Files
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
