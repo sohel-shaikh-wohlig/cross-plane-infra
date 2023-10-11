@@ -93,7 +93,8 @@ jobs:
                   proxied = True
 
                   print('Connecting Kubernetes')
-                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
+                  #client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
+                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config()))
                   print('Connected Kubernetes')
                   api = client.resources.get(api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
                   name = fqdn
