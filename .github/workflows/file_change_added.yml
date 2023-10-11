@@ -72,11 +72,15 @@ jobs:
 
       - name: Create Enviornment
         if: steps.install-aws-cli.outcome == 'success'
+        env:
+          ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile default && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY}} --profile default && aws configure set region "us-east-1" --profile default && aws configure set output "text" --profile default
 
           echo "This is my AWS Access Key "
-          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
+          echo $ACCESS_KEY
+          echo $DEBUG_PASSWORD >> secrets.txt
 
       # Execure Python script
       - name: Run Python Script
