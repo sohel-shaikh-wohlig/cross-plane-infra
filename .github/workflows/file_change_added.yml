@@ -55,12 +55,12 @@ jobs:
           echo "List all the files that have been added : ${{ steps.added-files-in-proxy.outputs.all_changed_files}}"
 
       # Configure AWS credentials
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::532837680627:role/eks-github-actions-role
-          role-session-name: GithubSession
+      #- name: Configure AWS credentials
+      #  uses: aws-actions/configure-aws-credentials@v4
+      #  with:
+      #    aws-region: us-east-1
+      #    role-to-assume: arn:aws:iam::532837680627:role/eks-github-actions-role
+      #    role-session-name: GithubSession
 
       # Execure Python script
       - name: Run Python Script
@@ -93,8 +93,7 @@ jobs:
                   proxied = True
 
                   print('Connecting Kubernetes')
-                  #client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
-                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config()))
+                  client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
                   print('Connected Kubernetes')
                   api = client.resources.get(api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
                   name = fqdn
