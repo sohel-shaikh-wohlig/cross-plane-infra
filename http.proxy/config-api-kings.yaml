@@ -1,21 +1,23 @@
 kind: HTTPProxy
 apiVersion: projectcontour.io/v1
 metadata:
-  name: archive-cron
+  name: combinedaggregator
 spec:
   routes:
     - conditions:
         - prefix: /
+        - header:
+            name: x-key-id
       rateLimitPolicy:
         global:
           descriptors:
             - entries:
                 - remoteAddress: {}
       services:
-        - name: archive-cron-cmlevel
+        - name: combinedaggregator
           port: 80
   virtualhost:
-    fqdn: archive-cron.playexch.co
+    fqdn: combinedaggregator.playexch.co
     corsPolicy:
       allowCredentials: true
       allowOrigin:
