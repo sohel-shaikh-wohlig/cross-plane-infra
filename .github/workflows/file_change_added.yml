@@ -92,7 +92,9 @@ jobs:
                   fqdn = content["spec"]["virtualhost"]["fqdn"]
                   proxied = True
 
+                  print('Connecting Kubernetes')
                   client = dynamic.DynamicClient(api_client.ApiClient(configuration=config.load_kube_config(config_file='./http.proxy/configuration.yaml')))
+                  print('Connected Kubernetes')
                   api = client.resources.get(api_version="dns.cloudflare.crossplane.io/v1alpha1", kind="Record")
                   name = fqdn
                   record_manifest = {
@@ -119,6 +121,7 @@ jobs:
                           }
                       }
                   }
+                  print('calling API')
                   record = api.create(body=record_manifest, namespace='default')
                   
                 except yaml.YAMLError as exc:
