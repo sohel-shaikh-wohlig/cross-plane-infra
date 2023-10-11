@@ -1,7 +1,7 @@
-apiVersion: projectcontour.io/v1
 kind: HTTPProxy
+apiVersion: projectcontour.io/v1
 metadata:
-  name: config-api-kings
+  name: archive-cron
 spec:
   routes:
     - conditions:
@@ -11,29 +11,22 @@ spec:
           descriptors:
             - entries:
                 - remoteAddress: {}
-      loadBalancerPolicy:
-        strategy: WeightedLeastRequest
       services:
-        - name: config-api
+        - name: archive-cron-cmlevel
           port: 80
-      timeoutPolicy:
-        idle: infinity
-        response: infinity
   virtualhost:
+    fqdn: archive-cron.playexch.co
     corsPolicy:
       allowCredentials: true
-      allowHeaders:
-        - '*'
+      allowOrigin:
+        - "*" # allows any origin
       allowMethods:
         - GET
         - POST
         - OPTIONS
-      allowOrigin:
-        - '*'
+      allowHeaders:
+        - "*" # allows any origin
       exposeHeaders:
         - Content-Length
         - Content-Range
-      maxAge: 11m
-    fqdn: configapi.kingsplay.co
-    tls:
-      secretName: config-api-kings
+      maxAge: "10m" # preflight requests can be cached for 10 minutes.
