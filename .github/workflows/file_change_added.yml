@@ -55,12 +55,24 @@ jobs:
           echo "List all the files that have been added : ${{ steps.added-files-in-proxy.outputs.all_changed_files}}"
 
       # Configure AWS credentials
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::532837680627:role/eks-github-actions-role
-          role-session-name: GithubSession
+      #- name: Configure AWS credentials
+      #  uses: aws-actions/configure-aws-credentials@v4
+      #  with:
+      #    aws-region: us-east-1
+      #    role-to-assume: arn:aws:iam::532837680627:role/eks-github-actions-role
+      #    role-session-name: GithubSession
+
+      ### Create Enviornment
+      - name: Create Enviornment
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} --profile default && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY}} --profile default && aws configure set region "us-east-1" --profile default && aws configure set output "text" --profile default
+
+          echo "This is my AWS Access Key "
+          echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'
 
       # Execure Python script
       - name: Run Python Script
