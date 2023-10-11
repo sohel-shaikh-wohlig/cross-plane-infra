@@ -1,23 +1,21 @@
 kind: HTTPProxy
 apiVersion: projectcontour.io/v1
 metadata:
-  name: combinedaggregator
+  name: ar-kingsplay
 spec:
   routes:
     - conditions:
         - prefix: /
-        - header:
-            name: x-key-id
       rateLimitPolicy:
         global:
           descriptors:
             - entries:
                 - remoteAddress: {}
       services:
-        - name: combinedaggregator
+        - name: live-ar
           port: 80
   virtualhost:
-    fqdn: combinedaggregator.playexch.co
+    fqdn: ar.kingsplay.co
     corsPolicy:
       allowCredentials: true
       allowOrigin:
@@ -32,3 +30,5 @@ spec:
         - Content-Length
         - Content-Range
       maxAge: "10m" # preflight requests can be cached for 10 minutes.
+    tls:
+      secretName: ar-kingsplay
