@@ -1,11 +1,11 @@
 apiVersion: dns.cloudflare.crossplane.io/v1alpha1
 kind: Record
 metadata:
-  name: historic-data.playexch.io
+  name: historic1-data.playexch.io
 spec:
   forProvider:
     content: nlb.zodexchange.co.
-    name: historic-data.playexch.io
+    name: historic1-data.playexch.io
     proxied: true
     type: CNAME
     zone: 7ea9fe1045447b31a338fbae6a1cfce9
@@ -14,3 +14,24 @@ spec:
         identifier: dns-record
   providerConfigRef:
     name: zodexchange.co
+
+---
+
+apiVersion: dns.cloudflare.crossplane.io/v1alpha1
+kind: Record
+metadata:
+  name: historic2-data.playexch.io
+spec:
+  forProvider:
+    content: nlb.zodexchange.co.
+    name: historic2-data.playexch.io
+    proxied: true
+    type: CNAME
+    zone: 7ea9fe1045447b31a338fbae6a1cfce9
+    zoneSelector:
+      matchLabels:
+        identifier: dns-record
+  providerConfigRef:
+    name: zodexchange.co
+
+
