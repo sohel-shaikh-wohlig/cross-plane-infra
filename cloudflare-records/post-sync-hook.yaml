@@ -36,8 +36,8 @@ spec:
           - -c
           - |
             make -v
-            date; ls -l /app;
             cd /app
+            date; ls -l /app;
             make run
             
       readinessProbe:
