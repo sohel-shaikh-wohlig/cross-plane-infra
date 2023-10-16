@@ -35,7 +35,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            apt-get update && apt-get install make
+            apt update && apt add install make
             sleep 50;
           readinessProbe:
             exec:
