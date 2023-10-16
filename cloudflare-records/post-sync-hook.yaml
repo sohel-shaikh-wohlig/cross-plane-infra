@@ -30,16 +30,17 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
-            mountPath:  /app
+            mountPath:  /usr/local/bin/
           command: 
           - /bin/sh
           - -c
           - |
-            apk install make
+            apk update
+            apk add make
             make -v
-            apk install go
-            cd /app
-            date; ls -l /app;
+            apk add go
+            cd /usr/local/bin/
+            date; ls -l /usr/local/bin/;
             make run
             sleep 1000
       readinessProbe:
