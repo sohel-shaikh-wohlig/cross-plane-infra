@@ -5,7 +5,7 @@ metadata:
   namespace: default
   annotations:
     argocd.argoproj.io/hook: PostSync 
-    #argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   ttlSecondsAfterFinished: 100
   template:
@@ -24,28 +24,19 @@ spec:
       volumes:
       - name:  cloudflare-provider
         emptyDir: {}
-      - name: make-cmd
-        image: ubuntu
-        imagePullPolicy: Always
-        volumeMounts:
+      containers:
+        - name: httpie
+          image: ubuntu
+          imagePullPolicy: Always
+          volumeMounts:
           - name:  cloudflare-provider
             mountPath:  /app
-        command: 
+          command: 
           - /bin/sh
           - -c
           - |
             apt update && apt upgrade -y
             apt install -y make
-
-      containers:
-        - name: httpie
-          image: alpine
-          imagePullPolicy: Always
-          command: 
-          - /bin/sh
-          - -c
-          - |
-            echo i am in container
             
       readinessProbe:
         exec:
@@ -56,8 +47,8 @@ spec:
             date; ls -l /app;
             cd /app
             make run
-        initialDelaySeconds: 100
-        periodSeconds: 100
+        initialDelaySeconds: 5000
+        periodSeconds: 5
             
       restartPolicy: OnFailure
   backoffLimit: 1
