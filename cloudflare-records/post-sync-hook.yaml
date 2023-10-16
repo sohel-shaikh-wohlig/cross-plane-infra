@@ -26,7 +26,7 @@ spec:
         emptyDir: {}
       containers:
         - name: httpie
-          image: ubuntu
+          image: alpine/make
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
@@ -35,8 +35,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            apt update && apt upgrade -y
-            apt install -y make
+            echo make -v
             
       readinessProbe:
         exec:
