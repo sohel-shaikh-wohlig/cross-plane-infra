@@ -35,9 +35,17 @@ spec:
           - /bin/sh
           - -c
           - |
-            date; ls -l /app;
-            sleep 5;
-            cd /app
-            make run
-      restartPolicy: Never
+            apt-get update && apt-get install make
+            sleep 50;
+          readinessProbe:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - |
+                date; ls -l /app;
+                cd /app
+                make run
+            
+      restartPolicy: OnFailure
   backoffLimit: 1

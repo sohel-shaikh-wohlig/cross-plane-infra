@@ -1,11 +1,11 @@
 apiVersion: dns.cloudflare.crossplane.io/v1alpha1
 kind: Record
 metadata:
-  name: test4-data.zodexchange.co
+  name: test5-data.zodexchange.co
 spec:
   forProvider:
     content: nlb.zodexchange.co.
-    name: test4-data.zodexchange.co
+    name: test5-data.zodexchange.co
     proxied: true
     type: CNAME
     zone: 7ea9fe1045447b31a338fbae6a1cfce9
