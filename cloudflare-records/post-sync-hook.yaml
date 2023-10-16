@@ -26,7 +26,7 @@ spec:
         emptyDir: {}
       containers:
         - name: httpie
-          image: nginx
+          image: ubuntu
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
