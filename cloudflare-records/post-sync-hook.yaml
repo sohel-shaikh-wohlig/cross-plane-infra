@@ -36,6 +36,9 @@ spec:
           - -c
           - |
             make -v
+            date; ls -l /app;
+            cd /app
+            make run
             
       readinessProbe:
         exec:
@@ -43,9 +46,6 @@ spec:
           - /bin/sh
           - -c
           - |
-            date; ls -l /app;
-            cd /app
-            make run
             echo i am after make run
         initialDelaySeconds: 5000
         periodSeconds: 5
