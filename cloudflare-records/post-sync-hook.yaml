@@ -24,19 +24,28 @@ spec:
       volumes:
       - name:  cloudflare-provider
         emptyDir: {}
-      containers:
-        - name: httpie
-          image: ubuntu
-          imagePullPolicy: Always
-          volumeMounts:
+      - name: make-cmd
+        image: ubuntu
+        imagePullPolicy: Always
+        volumeMounts:
           - name:  cloudflare-provider
             mountPath:  /app
-          command: 
+        command: 
           - /bin/sh
           - -c
           - |
             apt update && apt upgrade -y
             apt install -y make
+
+      containers:
+        - name: httpie
+          image: alpine
+          imagePullPolicy: Always
+          command: 
+          - /bin/sh
+          - -c
+          - |
+            echo i am in container
             
       readinessProbe:
         exec:
