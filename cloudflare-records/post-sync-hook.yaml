@@ -37,6 +37,7 @@ spec:
           - |
             date; ls -l /app;
             sleep 5;
+            cd /app
             make run
       restartPolicy: Never
   backoffLimit: 1
