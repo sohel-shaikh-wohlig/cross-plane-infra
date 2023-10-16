@@ -8,7 +8,7 @@ metadata:
 spec:
   project: production
   source:
-    path: cloudflare-records-1
+    path: cloudflare-records
     repoURL: https://github.com/sohel-shaikh-wohlig/cross-plane-infra
     targetRevision: HEAD
   destination:
