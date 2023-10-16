@@ -12,15 +12,15 @@ spec:
     spec:
       containers:
         - name: httpie
-          image: alpine/httpie:2.4.0
+          image: alpine:3.14
           imagePullPolicy: Always
-          command: ["http"]
+          command: 
+          - /bin/sh
+          - -c
+          - data; echo Hello from the JOB run after PostSync of Cloudflare record created
           args:
             [
-              "POST",
-              "todo-gitops:8080/api",
-              "title=Finish ArgoCD tutorial & make run command executed",
-              "--ignore-stdin"
+              
             ]
       restartPolicy: Never
   backoffLimit: 1
