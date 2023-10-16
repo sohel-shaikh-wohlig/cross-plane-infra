@@ -35,8 +35,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            apt-get update && apt-get install -y make
-            sleep 50;
+            sudo apt install build-essential
           readinessProbe:
             exec:
               command:
