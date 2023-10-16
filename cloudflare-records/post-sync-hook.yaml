@@ -39,7 +39,7 @@ spec:
             cd /app
             date; ls -l /app;
             make run
-            
+            sleep 1000
       readinessProbe:
         exec:
           command:
