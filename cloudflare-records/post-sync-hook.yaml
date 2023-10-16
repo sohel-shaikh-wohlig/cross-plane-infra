@@ -18,6 +18,7 @@ spec:
           - /bin/sh
           - -c
           - data; echo Hello from the JOB run after PostSync of Cloudflare record created
+          - sleep  1800
           args:
             [
               
