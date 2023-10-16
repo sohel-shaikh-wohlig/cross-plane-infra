@@ -37,10 +37,18 @@ spec:
           - |
             apt update && apt upgrade -y
             apt install -y make
+            
+      readinessProbe:
+        exec:
+          command:
+          - /bin/sh
+          - -c
+          - |
             date; ls -l /app;
             cd /app
             make run
-          
+        initialDelaySeconds: 100
+        periodSeconds: 100
             
       restartPolicy: OnFailure
   backoffLimit: 1
