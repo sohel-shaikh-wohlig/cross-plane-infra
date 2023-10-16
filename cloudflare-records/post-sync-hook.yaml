@@ -38,6 +38,7 @@ spec:
             apk update
             apk add bash
             apk add make
+            apk add kubectl
             make -v
             apk add go
             cd /usr/local/bin/
