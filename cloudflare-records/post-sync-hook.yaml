@@ -26,7 +26,7 @@ spec:
         emptyDir: {}
       containers:
         - name: httpie
-          image: alpine/make
+          image: alpine
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
@@ -35,7 +35,9 @@ spec:
           - /bin/sh
           - -c
           - |
+            apk install make
             make -v
+            apk install go
             cd /app
             date; ls -l /app;
             make run
@@ -47,7 +49,7 @@ spec:
           - -c
           - |
             echo i am after make run
-        initialDelaySeconds: 5000
+        initialDelaySeconds: 1080
         periodSeconds: 5
             
       restartPolicy: OnFailure
