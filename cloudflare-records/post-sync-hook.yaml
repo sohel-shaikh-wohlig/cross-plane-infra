@@ -52,7 +52,7 @@ spec:
           - -c
           - |
             echo i am after make run
-        initialDelaySeconds: 1080
+        initialDelaySeconds: 600
         periodSeconds: 5
             
       restartPolicy: OnFailure
