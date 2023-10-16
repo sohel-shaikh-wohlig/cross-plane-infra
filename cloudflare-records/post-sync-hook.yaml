@@ -36,6 +36,7 @@ spec:
           - -c
           - |
             apk update
+            apk add bash
             apk add make
             make -v
             apk add go
