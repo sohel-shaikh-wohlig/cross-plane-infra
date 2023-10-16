@@ -7,21 +7,36 @@ metadata:
     argocd.argoproj.io/hook: PostSync 
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
-  ttlSecondsAfterFinished: 540
+  ttlSecondsAfterFinished: 100
   template:
     spec:
+      initContainers:
+      - name: git
+        image: alpine/git
+        command:
+        - git
+        - clone 
+        - https://github.com/crossplane-contrib/provider-cloudflare.git
+        - /provider-repo
+        volumeMounts:
+        - name:  cloudflare-provider
+          mountPath:  /provider-repo
+      volumes:
+      - name:  cloudflare-provider
+        emptyDir: {}
       containers:
         - name: httpie
           image: alpine:3.14
           imagePullPolicy: Always
+          volumeMounts:
+          - name:  cloudflare-provider
+            mountPath:  /app
           command: 
           - /bin/sh
           - -c
-          - data; echo Hello from the JOB run after PostSync of Cloudflare record created
-          - sleep  1800
-          args:
-            [
-              
-            ]
+          - |
+            date; ls -l /app;
+            sleep 5;
+            make run
       restartPolicy: Never
   backoffLimit: 1
