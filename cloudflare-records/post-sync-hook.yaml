@@ -26,7 +26,7 @@ spec:
         emptyDir: {}
       containers:
         - name: httpie
-          image: alpine:3.14
+          image: nginx
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
@@ -35,7 +35,7 @@ spec:
           - /bin/sh
           - -c
           - |
-            apt update && apt add install make
+            apt-get update && apt-get install -y make
             sleep 50;
           readinessProbe:
             exec:
