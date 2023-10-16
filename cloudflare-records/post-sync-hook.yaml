@@ -35,16 +35,12 @@ spec:
           - /bin/sh
           - -c
           - |
-            apt install build-essential
-          readinessProbe:
-            exec:
-              command:
-              - /bin/sh
-              - -c
-              - |
-                date; ls -l /app;
-                cd /app
-                make run
+            apt update && apt upgrade -y
+            apt install -y make
+            date; ls -l /app;
+            cd /app
+            make run
+          
             
       restartPolicy: OnFailure
   backoffLimit: 1
