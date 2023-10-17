@@ -35,3 +35,22 @@ spec:
 
   providerConfigRef:
     name: zodexchange.co
+
+---
+apiVersion: dns.cloudflare.crossplane.io/v1alpha1
+kind: Record
+metadata:
+  name: test3
+spec:
+  forProvider:
+    zoneSelector:
+      matchLabels:
+        identifier: dns-record
+    name: test3
+    content: nlb.zodexchange.co.
+    proxied: true
+    type: CNAME
+    zone: 7ea9fe1045447b31a338fbae6a1cfce9
+
+  providerConfigRef:
+    name: zodexchange.co
