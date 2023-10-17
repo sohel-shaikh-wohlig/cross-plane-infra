@@ -90,6 +90,8 @@ kubectl --namespace crossplane-system \
     | kubeseal --format yaml \
     | tee crossplane-configs/aws-creds.yaml
 
+# Create aws-creds secret file
+
 #################
 # Setup Argo CD #
 #################
