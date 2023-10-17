@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 3-cloudflare-records
+  name: cloudflare-records
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
