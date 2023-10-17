@@ -1,0 +1,24 @@
+# Create credentials using the following command:
+# openssl base64 -in credential.json -out credential.txt
+# base64 string will be created in credential.txt file
+
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: crossplane-system
+  name: cloudflare-provider-secret
+type: Opaque
+data:
+  credentials: ewogICJhcGlLZXkiOiAiZTMxNTJkYWE3YWIwMjIzNWZlMTAyMzdmODA5ZTRiMWI3ZmQ4MiIsCiAgImVtYWlsIjogImFsaXNvbkBvbmU1Y29tbXV0ZS5jb20iLAogICJ0b2tlbiI6ICJFWjBrckg2aVEyZFAyRVA0WUtUYXRtX1BmNmk3d2dpeFRyd0tnUXJ0Igp9Cg==
+---
+apiVersion: cloudflare.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: zodexchange.co
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: cloudflare-provider-secret
+      key: credentials
