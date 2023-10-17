@@ -30,7 +30,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
           - name:  cloudflare-provider
-            mountPath:  /usr/local/bin/
+            mountPath:  /app
           command: 
           - /bin/sh
           - -c
@@ -41,10 +41,10 @@ spec:
             apk add kubectl
             make -v
             apk add go
-            cd /usr/local/bin/
-            date; ls -l /usr/local/bin/;
+            cd /app
+            date; ls -l /app;
             make run
-            sleep 1000
+            sleep 900
       readinessProbe:
         exec:
           command:
