@@ -1,13 +1,13 @@
 apiVersion: dns.cloudflare.crossplane.io/v1alpha1
 kind: Record
 metadata:
-  name: test1
+  name: record1
 spec:
   forProvider:
     zoneSelector:
       matchLabels:
         identifier: dns-record
-    name: test1
+    name: record1
     content: nlb.zodexchange.co.
     proxied: true
     type: CNAME
