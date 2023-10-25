@@ -10,7 +10,7 @@ spec:
   source:
     path: cloudflare-records
     repoURL: https://github.com/sohel-shaikh-wohlig/cross-plane-infra
-    targetRevision: HEAD
+    targetRevision: Tags
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:
